@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+</head>
+<body>
+
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">SEQN</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="number" id="number" lay-verify="required|number" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">Threshold</label>
+            <div class="layui-input-inline">
+                <input type="text" name="values" id="values" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">Time Interval</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="start" id="start" placeholder="start" autocomplete="off"
+                       class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="end" id="end" placeholder="end" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">Submit</button>
+                <button type="reset" class="layui-btn layui-btn-primary">Reset</button>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn" type="button" id="btn1">Match in Rest</button>
+        </div>
+    </div>
+</form>
+<div id="main" style="width: 100%;height:750px;"></div>
+<div id="main1" style="width: 100%;height:750px;"></div>
+<table id="demo" lay-filter="test"></table>
+<script src="/static/layui/layui.js" charset="utf-8"></script>
+<script src="/static/echarts.min.js" charset="utf-8"></script>
+<script src="/static/jquery-2.2.1.min.js" charset="utf-8"></script>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="add">Show the Chart</button>
+    </div>
+</script>
+<script>
+    layui.use(['form', 'jquery', 'layer', 'table'], function () {
+        var form = layui.form;
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var table = layui.table;
+        var myChart = echarts.init(document.getElementById('main'));
+        var myChart1 = echarts.init(document.getElementById('main1'));
+        $("#main1").attr("style","display:none;");
+        table.render({
+            elem: '#demo'
+            , url: '/get_clinical?/number=0'
+            , toolbar: '#toolbarDemo'
+            , page: true //开启分页
+            , limit: 10 //开启分页
+            , cols: [[ //表头
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'number', title: 'number', width: 80}
+                , {field: 'SEQN', title: 'SEQN', width: 80}
+                , {field: 'SDDSRVYR', title: 'SDDSRVYR', width: 80}
+                , {field: 'permth_exm', title: 'permth_exm', width: 80}
+                , {field: 'permth_int', title: 'permth_int', width: 80}
+                , {field: 'ucod_leading', title: 'ucod_leading', width: 80}
+                , {field: 'diabetes_mcod', title: 'diabetes_mcod', width: 80}
+                , {field: 'hyperten_mcod', title: 'hyperten_mcod', width: 80}
+                , {field: 'hyperten_mcod', title: 'hyperten_mcod', width: 80}
+                , {field: 'SDMVPSU', title: 'SDMVPSU', width: 80}
+                , {field: 'SDMVSTRA', title: 'SDMVSTRA', width: 80}
+                , {field: 'WTINT2YR', title: 'WTINT2YR', width: 80}
+                , {field: 'WTMEC2YR', title: 'WTMEC2YR', width: 80}
+                , {field: 'RIDAGEMN', title: 'RIDAGEMN', width: 80}
+                , {field: 'RIDAGEEX', title: 'RIDAGEEX', width: 80}
+                , {field: 'RIDAGEYR', title: 'RIDAGEYR', width: 80}
+                , {field: 'BMI', title: 'BMI', width: 80}
+                , {field: 'BMI_cat', title: 'BMI_cat', width: 80}
+                , {field: 'Race', title: 'Race', width: 80}
+                , {field: 'Gender', title: 'Gender', width: 80}
+                , {field: 'Diabetes', title: 'Diabetes', width: 80}
+                , {field: 'CHF', title: 'CHF', width: 80}
+                , {field: 'CHD', title: 'CHD', width: 80}
+                , {field: 'Cancer', title: 'Cancer', width: 80}
+                , {field: 'Stroke', title: 'Stroke', width: 80}
+                , {field: 'EducationAdult', title: 'EducationAdult', width: 80}
+                , {field: 'MobilityProblem', title: 'MobilityProblem', width: 80}
+                , {field: 'DrinkStatus', title: 'DrinkStatus', width: 80}
+                , {field: 'DrinksPerWeek', title: 'DrinksPerWeek', width: 80}
+                , {field: 'SmokeCigs', title: 'SmokeCigs', width: 80}
+                , {field: 'BPXSY1', title: 'BPXSY1', width: 80}
+                , {field: 'BPXSY2', title: 'BPXSY2', width: 80}
+                , {field: 'BPXSY3', title: 'BPXSY3', width: 80}
+                , {field: 'BPXSY4', title: 'BPXSY4', width: 80}
+                , {field: 'LBXTC', title: 'LBXTC', width: 80}
+                , {field: 'LBDHDD', title: 'LBDHDD', width: 80}
+                , {field: 'mort', title: 'mort', width: 80}
+                , {field: 'Age', title: 'Age', width: 80}
+                , {field: 'SYS', title: 'SYS', width: 80}
+                , {field: 'TAC', title: 'TAC', width: 80}
+                , {field: 'TLAC', title: 'TLAC', width: 80}
+                , {field: 'TLAC_1', title: 'TLAC_1', width: 80}
+                , {field: 'TLAC_2', title: 'TLAC_2', width: 80}
+                , {field: 'TLAC_3', title: 'TLAC_3', width: 80}
+                , {field: 'TLAC_4', title: 'TLAC_4', width: 80}
+                , {field: 'TLAC_5', title: 'TLAC_5', width: 80}
+                , {field: 'TLAC_6', title: 'TLAC_6', width: 80}
+                , {field: 'TLAC_7', title: 'TLAC_7', width: 80}
+                , {field: 'TLAC_8', title: 'TLAC_8', width: 80}
+                , {field: 'TLAC_9', title: 'TLAC_9', width: 80}
+                , {field: 'TLAC_10', title: 'TLAC_10', width: 80}
+                , {field: 'TLAC_11', title: 'TLAC_11', width: 80}
+                , {field: 'TLAC_12', title: 'TLAC_12', width: 80}
+
+            ]]
+            , done: function (res) {
+                tdTitle();
+            }
+        });
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus('demo');
+            var data = checkStatus.data;
+            switch (obj.event) {
+                case 'add':
+                    if (data.length === 1) {
+                        var number = data[0].number;
+                        var data_number = sessionStorage.getItem('number_time').split(',');
+                        var start = data_number[0];
+                        var end = data_number[1];
+                        var values = data_number[2];
+                        console.log(number)
+                        console.log(start)
+                        console.log(end)
+                        console.log(values)
+                        $.get('/get_data', {'number': number,'values':values,'start':start,'end':end}, function (res) {
+                                if (res.msg === '0000') {
+                                    $("#main1").attr("style","display:block;");
+                                    var y_data = res.y_data;
+                                    var number = res.number;
+                                    f1(number, y_data, 'main1');
+                                } else {
+                                    layer.msg(res.msg)
+                                }
+                            }
+                        )
+
+                    } else {
+                        layer.msg('Please select one row of data')
+                    }
+                    break;
+
+            }
+
+        });
+        $.get('/get_data', function (res) {
+            if (res.msg === '0000') {
+                var y_data = res.y_data;
+                var number = res.number;
+                f1(number, y_data, 'main')
+            } else {
+                layer.msg(res.msg)
+            }
+        })
+        $("#btn1").click(function () {
+            var number_list = sessionStorage.getItem('number_list')
+            var number_time = sessionStorage.getItem('number_time')
+            table.reload('demo', {
+                url: '/index_data?number_list=' + number_list + '&number_time=' + number_time
+
+                , page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+
+            });
+        });
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            var number_time = [];
+            number_time.push(data.field.start)
+            number_time.push(data.field.end)
+            number_time.push(data.field.values)
+            $.get('/get_data', data.field, function (res) {
+                    if (res.msg === '0000') {
+                        var y_data = res.y_data;
+                        var number = res.number;
+                        sessionStorage.clear()
+                        sessionStorage.setItem('number_list', res.number_list)
+                        sessionStorage.setItem('number_time', number_time)
+                        f1(number, y_data, 'main');
+                        table.reload('demo', {
+                            url: '/get_clinical'
+                            , where: {
+                                'number': data.field.number
+                            }
+                            , page: {
+                                curr: 1 //重新从第 1 页开始
+                            }
+
+                        });
+
+                    } else {
+                        layer.msg(res.msg)
+                    }
+                }
+            )
+
+
+            return false;
+        });
+
+        function f1(number, y_data, e_type) {
+            var option = {
+                title: {
+                    text: 'The SEQN is：' + number
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                    type: 'cross'
+                    }
+                },
+                legend: {},
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    data: ['0Mon3:40', '1Mon7:00', '2Mon10:20', '3Mon13:40', '4Mon17:00',
+        '5Mon20:20', '6Mon23:40', '7Tue3:00', '8Tue6:20', '9Tue9:40',
+        '10Tue13:00', '11Tue16:20', '12Tue19:40', '13Tue23:00',
+        '14Wed2:20', '15Wed5:40', '16Wed9:00', '17Wed12:20',
+        '18Wed15:40', '19Wed19:00', '20Wed22:20', '21Thu1:40',
+        '22Thu5:00', '23Thu8:20', '24Thu11:40', '25Thu15:00',
+        '26Thu18:20', '27Thu21:40', '28Fri1:00', '29Fri4:20',
+        '30Fri7:40', '31Fri11:00', '32Fri14:20', '33Fri17:40',
+        '34Fri21:00', '35Sat0:20', '36Sat3:40', '37Sat7:00',
+        '38Sat10:20', '39Sat13:40', '40Sat17:00', '41Sat20:20',
+        '42Sat23:40', '43Sun3:00', '44Sun6:20', '45Sun9:40',
+        '46Sun13:00', '47Sun16:20', '48Sun19:40', '49Sun23:00'],
+                    axisLabel: {
+                        interval: 0,
+                        formatter: function (value) {
+                            return value.split("").join("\n");
+                        }
+                    }
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: y_data
+            };
+
+
+            // 使用刚指定的配置项和数据显示图表。
+            if (e_type === 'main') {
+                myChart.setOption(option, true);
+            } else {
+                myChart1.setOption(option, true);
+            }
+        }
+
+    });
+</script>
+<script>
+    function tdTitle() {
+        $('th').each(function (index, element) {
+            $(element).attr('title', $(element).text());
+        });
+        $('td').each(function (index, element) {
+            $(element).attr('title', $(element).text());
+        });
+    }
+</script>
+
+</body>
+</html>

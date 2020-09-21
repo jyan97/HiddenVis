@@ -1,0 +1,25 @@
+         [
+                    {
+                        type: 'line',
+                        data: [120, 132, 101, 134, 90, 230, 210]
+                    },
+
+                    {
+                        type: 'line',
+                        data: [820, 932, 901, 934, 1290, 1330, 1320],
+                        markLine: {
+                            data: [{
+                                silent: false,             //鼠标悬停事件  true没有，false有
+                                lineStyle: {               //警戒线的样式  ，虚实  颜色
+                                    type: "solid",
+                                    color: "#3398DB",
+                                },
+                                yAxis: 1000        // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+
+                            },
+
+                            ]
+                        }
+                    }
+
+                ]
