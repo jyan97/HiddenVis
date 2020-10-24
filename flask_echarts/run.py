@@ -129,6 +129,7 @@ def get_data():
             y_data.append(y_data_dict)
     global hidden_seq
     hidden_seq = number_list
+    print(hidden_seq)
     return jsonify({'msg': '0000', 'number': number, 'y_data': y_data, 'number_list': number_list})
 
 
