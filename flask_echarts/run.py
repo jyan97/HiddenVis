@@ -1,12 +1,10 @@
-import operator
-import math
-from flask import render_template, jsonify, request, g
+from flask import render_template, jsonify, request, g, redirect, url_for
 from apps import create_app
-# from apps.models import Sequential, Clinical
-# from utils import model_to_dict
 import pickle
 import numpy as np
 import pandas as pd
+from werkzeug.utils import secure_filename
+import os
 
 app = create_app()
 
@@ -22,10 +20,19 @@ start, end, values = 0, 0, 0
 SEQ_DATA = list()
 
 
-@app.route('/')
-def index():
+@app.route('/redi_upload')
+def redi_upload():
     return render_template('index.html')
 
+@app.route('/', methods=['POST', 'GET'])
+def upload():
+    if request.method == 'POST':
+        f = request.files['file']
+        basepath = os.path.dirname(__file__)
+        upload_path = os.path.join(basepath, r'test\data.pkl')
+        f.save(upload_path)
+        return redirect(url_for('upload'))
+    return render_template('upload.html')
 
 @app.route('/get_clinical')
 def get_clinical():
