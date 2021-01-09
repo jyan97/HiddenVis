@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <form class="layui-form" action="">
@@ -50,6 +54,10 @@
 <div id="main" style="width: 100%;height:750px;"></div>
 <div id="main1" style="width: 100%;height:750px;"></div>
 <table id="demo" lay-filter="test"></table>
+
+
+
+
 <script src="/static/layui/layui.js" charset="utf-8"></script>
 <script src="/static/echarts.min.js" charset="utf-8"></script>
 <script src="/static/jquery-2.2.1.min.js" charset="utf-8"></script>
@@ -78,19 +86,10 @@
                 , {field: 'number', title: 'number', width: 80}
                 , {field: 'SEQN', title: 'SEQN', width: 80}
                 , {field: 'SDDSRVYR', title: 'SDDSRVYR', width: 80}
-                , {field: 'permth_exm', title: 'permth_exm', width: 80}
-                , {field: 'permth_int', title: 'permth_int', width: 80}
-                , {field: 'ucod_leading', title: 'ucod_leading', width: 80}
-                , {field: 'diabetes_mcod', title: 'diabetes_mcod', width: 80}
-                , {field: 'hyperten_mcod', title: 'hyperten_mcod', width: 80}
-                , {field: 'hyperten_mcod', title: 'hyperten_mcod', width: 80}
-                , {field: 'SDMVPSU', title: 'SDMVPSU', width: 80}
-                , {field: 'SDMVSTRA', title: 'SDMVSTRA', width: 80}
-                , {field: 'WTINT2YR', title: 'WTINT2YR', width: 80}
-                , {field: 'WTMEC2YR', title: 'WTMEC2YR', width: 80}
-                , {field: 'RIDAGEMN', title: 'RIDAGEMN', width: 80}
-                , {field: 'RIDAGEEX', title: 'RIDAGEEX', width: 80}
-                , {field: 'RIDAGEYR', title: 'RIDAGEYR', width: 80}
+                , {field: 'mort', title: 'mort', width: 80}
+                , {field: 'Age', title: 'Age', width: 80}
+                , {field: 'SYS', title: 'SYS', width: 80}
+                , {field: 'TAC', title: 'TAC', width: 80}
                 , {field: 'BMI', title: 'BMI', width: 80}
                 , {field: 'BMI_cat', title: 'BMI_cat', width: 80}
                 , {field: 'Race', title: 'Race', width: 80}
@@ -105,16 +104,25 @@
                 , {field: 'DrinkStatus', title: 'DrinkStatus', width: 80}
                 , {field: 'DrinksPerWeek', title: 'DrinksPerWeek', width: 80}
                 , {field: 'SmokeCigs', title: 'SmokeCigs', width: 80}
+                , {field: 'permth_exm', title: 'permth_exm', width: 80}
+                , {field: 'permth_int', title: 'permth_int', width: 80}
+                , {field: 'ucod_leading', title: 'ucod_leading', width: 80}
+                , {field: 'diabetes_mcod', title: 'diabetes_mcod', width: 80}
+                , {field: 'hyperten_mcod', title: 'hyperten_mcod', width: 80}
+                , {field: 'hyperten_mcod', title: 'hyperten_mcod', width: 80}
+                , {field: 'SDMVPSU', title: 'SDMVPSU', width: 80}
+                , {field: 'SDMVSTRA', title: 'SDMVSTRA', width: 80}
+                , {field: 'WTINT2YR', title: 'WTINT2YR', width: 80}
+                , {field: 'WTMEC2YR', title: 'WTMEC2YR', width: 80}
+                , {field: 'RIDAGEMN', title: 'RIDAGEMN', width: 80}
+                , {field: 'RIDAGEEX', title: 'RIDAGEEX', width: 80}
+                , {field: 'RIDAGEYR', title: 'RIDAGEYR', width: 80}
                 , {field: 'BPXSY1', title: 'BPXSY1', width: 80}
                 , {field: 'BPXSY2', title: 'BPXSY2', width: 80}
                 , {field: 'BPXSY3', title: 'BPXSY3', width: 80}
                 , {field: 'BPXSY4', title: 'BPXSY4', width: 80}
                 , {field: 'LBXTC', title: 'LBXTC', width: 80}
                 , {field: 'LBDHDD', title: 'LBDHDD', width: 80}
-                , {field: 'mort', title: 'mort', width: 80}
-                , {field: 'Age', title: 'Age', width: 80}
-                , {field: 'SYS', title: 'SYS', width: 80}
-                , {field: 'TAC', title: 'TAC', width: 80}
                 , {field: 'TLAC', title: 'TLAC', width: 80}
                 , {field: 'TLAC_1', title: 'TLAC_1', width: 80}
                 , {field: 'TLAC_2', title: 'TLAC_2', width: 80}
@@ -275,7 +283,7 @@
             };
 
 
-            // 使用刚指定的配置项和数据显示图表。
+
             if (e_type === 'main') {
                 myChart.setOption(option, true);
             } else {
@@ -295,6 +303,93 @@
         });
     }
 </script>
+
+<div class="row" style="margin-top: 40px;margin-left: -180px">
+
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <a type="button" class="btn btn-default" href="/read">Load column features</a>
+
+    </div>
+</div>
+
+<div class="row" style="margin-top: 20px;margin-left: -180px">
+
+    <div class="col-sm-1"></div>
+    {% if columns %}
+        <div class="col-sm-10">
+            <div class="read_detail">
+                <h4>Select one column feature：</h4>
+            </div>
+            <div style="margin-top: 30px" class="detail_btn">
+                {% for column in columns %}
+                    <button type="button" class="btn btn-default btn_{{ column }}"
+                            onclick="plot('{{ column }}')">{{ column }}</button>
+                {% endfor %}
+
+
+            </div>
+            <div style="margin-top: 30px" class="read_detail">
+
+
+                <h4>Bin size (if applicable): <input type="text" value="5" id="size">
+                </h4>
+                <button type="button" class="btn btn-default" style="margin-top: 30px" onclick="show()">Generate diagram</button>
+
+            </div>
+
+
+        <div style="margin-top: 20px">
+            <img src="" alt="" class="img1">
+            <img src="" alt="" class="img2">
+        </div>
+
+
+        </div>
+
+    {% endif %}
+</div>
+
+
+<script>
+    var plot_type = undefined
+
+
+    function plot(pk) {
+        $(".btn").removeClass("btn-primary")
+        $(".btn").addClass("btn-default")
+        $(".btn_" + pk).removeClass("btn-default")
+        $(".btn_" + pk).addClass("btn-primary")
+        plot_type = pk
+
+    }
+
+    function show() {
+        var size = $("#size").val()
+        if(plot_type==undefined){
+            alert("Please select one column feature!")
+            return
+        }
+        $.get("/plot/"+plot_type+"/"+size,function (data,status){
+            console.log(data)
+            $(".img1").attr("src","/static/images/"+data+'.jpg')
+            $(".img2").attr("src","/static/images/"+data+'.png')
+        })
+
+    }
+</script>
+
+<div align="left" style="margin-top:20px">
+            <form action="http://127.0.0.1:5000/sankey" method="POST" name = "form1">
+                <input style="width:200px; height: 28px; font-size: 15px" type="text" name = "interval" placeholder = "Time intervals"/>
+                <input style="padding: 4px 10px" type="submit" value = "Generate sankey plot"/>
+            </form>
+        </div>
+
+
+
+
+
 
 </body>
 </html>
