@@ -39,9 +39,15 @@ def redi_upload():
 @app.route('/', methods=['POST', 'GET'])
 def upload():
     if request.method == 'POST':
-        f = request.files['file']
+        f = request.files['rnn']
         basepath = os.path.dirname(__file__)
         upload_path = os.path.join(basepath, r'test\data.pkl')
+        f.save(upload_path)
+        f = request.files['clinical']
+        upload_path = os.path.join(basepath, r'test\clinical data.csv')
+        f.save(upload_path)
+        f = request.files['activity']
+        upload_path = os.path.join(basepath, r'act_analysis.csv')
         f.save(upload_path)
         return redirect(url_for('upload'))
     return render_template('upload.html')
